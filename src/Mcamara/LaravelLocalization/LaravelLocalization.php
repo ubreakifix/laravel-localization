@@ -134,6 +134,10 @@ class LaravelLocalization {
             // If the locale has not been passed through the function
             // it tries to get it from the first segment of the url
             $locale = $this->request->segment(1);
+
+            if ($this->request->segment(2) && !empty($this->supportedLocales[$locale . '/' . $this->request->segment(2)])) {
+                $locale .= '/' . $this->request->segment(2);
+            }
         }
 
         if ( !empty( $this->supportedLocales[ $locale ] ) )
